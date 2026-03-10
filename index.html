@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Start Your Income Journey — Richard Vaalotu</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{height:100%;overflow:hidden}
+body{
+  height:100%;
+  font-family:'Space Grotesk',sans-serif;
+  background:#04080f;
+  color:#e8f0ff;
+  overflow:hidden;
+  position:relative;
+}
+
+/* ── STAR CANVAS ── */
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ── AURORA BG ── */
+.aurora{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 20%, rgba(0,200,120,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0,150,255,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 50% 50%, rgba(100,0,200,0.04) 0%, transparent 70%);
+  animation:auroraShift 12s ease-in-out infinite alternate;
+}
+@keyframes auroraShift{
+  0%{opacity:.6;transform:scale(1)}
+  100%{opacity:1;transform:scale(1.05)}
+}
+
+/* ── MAIN WRAPPER ── */
+.app{
+  position:relative;z-index:1;
+  height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:16px;
+}
+
+/* ── PROGRESS BAR ── */
+.progress-wrap{
+  width:100%;max-width:520px;
+  margin-bottom:20px;
+  flex-shrink:0;
+}
+.progress-top{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:8px;
+}
+.progress-label{
+  font-size:.72rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(200,220,255,.5);
+}
+.progress-step{
+  font-size:.72rem;font-weight:700;
+  color:rgba(0,220,130,.8);
+}
+.progress-track{
+  height:3px;background:rgba(255,255,255,.08);
+  border-radius:2px;overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,#00dc82,#00b4f0);
+  border-radius:2px;
+  transition:width .6s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 0 12px rgba(0,220,130,.4);
+}
+
+/* ── CARD ── */
+.card{
+  width:100%;max-width:520px;
+  background:rgba(8,16,32,.85);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:24px;
+  padding:36px 32px 28px;
+  backdrop-filter:blur(20px);
+  box-shadow:
+    0 0 0 1px rgba(0,220,130,.05),
+    0 40px 80px rgba(0,0,0,.6),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  position:relative;
+  overflow:hidden;
+  max-height:calc(100vh - 140px);
+  display:flex;flex-direction:column;
+}
+
+.card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,#00dc82,#00b4f0,transparent);
+  opacity:.6;
+}
+
+/* ── STEP CONTENT ── */
+.step{
+  display:none;flex-direction:column;gap:0;
+  flex:1;overflow:hidden;
+}
+.step.active{display:flex;animation:stepIn .4s cubic-bezier(.4,0,.2,1)}
+.step.exit{animation:stepOut .3s cubic-bezier(.4,0,.2,1) forwards}
+
+@keyframes stepIn{
+  from{opacity:0;transform:translateX(30px)}
+  to{opacity:1;transform:translateX(0)}
+}
+@keyframes stepOut{
+  from{opacity:1;transform:translateX(0)}
+  to{opacity:0;transform:translateX(-30px)}
+}
+
+/* ── SCROLL AREA ── */
+.step-scroll{
+  flex:1;overflow-y:auto;
+  padding-right:4px;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(0,220,130,.3) transparent;
+}
+.step-scroll::-webkit-scrollbar{width:3px}
+.step-scroll::-webkit-scrollbar-thumb{background:rgba(0,220,130,.3);border-radius:2px}
+
+/* ── STEP ICON ── */
+.step-icon{
+  font-size:2.8rem;margin-bottom:16px;
+  display:block;
+  filter:drop-shadow(0 0 20px rgba(0,220,130,.3));
+}
+
+/* ── TYPOGRAPHY ── */
+.step-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.4rem,4vw,1.9rem);
+  font-weight:800;
+  line-height:1.15;
+  margin-bottom:14px;
+  color:#fff;
+}
+.step-title em{
+  font-style:normal;
+  background:linear-gradient(135deg,#00dc82,#00b4f0);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.step-body{
+  font-size:.92rem;line-height:1.75;
+  color:rgba(200,220,255,.75);
+  margin-bottom:20px;
+}
+.step-body strong{color:#e8f0ff}
+.step-body .highlight{
+  color:#00dc82;font-weight:700;
+}
+.step-body .money{
+  color:#ffd60a;font-weight:700;font-size:1rem;
+}
+
+/* ── INFO BLOCKS ── */
+.info-block{
+  background:rgba(0,220,130,.05);
+  border:1px solid rgba(0,220,130,.12);
+  border-radius:14px;
+  padding:14px 16px;
+  margin-bottom:14px;
+  font-size:.87rem;
+  line-height:1.7;
+  color:rgba(200,220,255,.8);
+}
+.info-block strong{color:#00dc82}
+.info-block.yellow{
+  background:rgba(255,214,10,.05);
+  border-color:rgba(255,214,10,.15);
+}
+.info-block.yellow strong{color:#ffd60a}
+.info-block.blue{
+  background:rgba(0,180,240,.05);
+  border-color:rgba(0,180,240,.12);
+}
+.info-block.blue strong{color:#00b4f0}
+
+/* ── INCOME ROWS ── */
+.income-row{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.income-row:last-child{border-bottom:none}
+.income-num{
+  width:32px;height:32px;border-radius:10px;flex-shrink:0;
+  background:rgba(0,220,130,.1);border:1px solid rgba(0,220,130,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:.85rem;color:#00dc82;
+}
+.income-text{flex:1}
+.income-title{font-weight:700;font-size:.9rem;margin-bottom:3px;color:#e8f0ff}
+.income-desc{font-size:.8rem;color:rgba(200,220,255,.6);line-height:1.5}
+.income-tag{
+  font-size:.65rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;padding:2px 8px;border-radius:100px;
+  background:rgba(0,220,130,.12);color:#00dc82;
+  white-space:nowrap;margin-top:2px;display:inline-block;
+}
+.income-tag.weekly{background:rgba(255,214,10,.12);color:#ffd60a}
+.income-tag.monthly{background:rgba(0,180,240,.12);color:#00b4f0}
+
+/* ── CALC SLIDERS ── */
+.calc-option{
+  display:flex;align-items:center;gap:14px;
+  padding:12px 16px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:12px;
+  margin-bottom:8px;
+  cursor:pointer;
+  transition:all .2s;
+}
+.calc-option:hover,.calc-option.selected{
+  background:rgba(0,220,130,.08);
+  border-color:rgba(0,220,130,.25);
+}
+.calc-option .radio{
+  width:18px;height:18px;border-radius:50%;flex-shrink:0;
+  border:2px solid rgba(255,255,255,.2);
+  transition:all .2s;display:flex;align-items:center;justify-content:center;
+}
+.calc-option.selected .radio{
+  border-color:#00dc82;background:#00dc82;
+}
+.calc-option.selected .radio::after{
+  content:'';width:6px;height:6px;border-radius:50%;background:#000;
+}
+.calc-option-text{flex:1;font-size:.9rem;font-weight:600}
+.calc-option-earn{font-size:.78rem;color:#00dc82;font-weight:700}
+
+/* ── RESULT BOX ── */
+.result-box{
+  background:linear-gradient(135deg,rgba(0,220,130,.08),rgba(0,180,240,.05));
+  border:1px solid rgba(0,220,130,.2);
+  border-radius:16px;
+  padding:20px;
+  margin:16px 0;
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.result-item{text-align:center}
+.result-num{
+  font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;
+  color:#00dc82;display:block;
+  text-shadow:0 0 20px rgba(0,220,130,.4);
+  line-height:1;
+}
+.result-label{
+  font-size:.65rem;text-transform:uppercase;
+  letter-spacing:.1em;color:rgba(200,220,255,.5);
+  margin-top:4px;
+}
+
+/* ── OBJECTION PILLS ── */
+.obj-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  margin-bottom:12px;
+}
+.obj-pill{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;
+  padding:12px 14px;
+  cursor:pointer;
+  transition:all .2s cubic-bezier(.34,1.56,.64,1);
+  font-size:.83rem;font-weight:600;
+  color:rgba(200,220,255,.8);
+  line-height:1.3;
+}
+.obj-pill:hover{
+  background:rgba(0,220,130,.08);
+  border-color:rgba(0,220,130,.2);
+  transform:translateY(-2px);
+  color:#e8f0ff;
+}
+.obj-pill.full{grid-column:1/-1}
+
+/* ── STEP INDICATORS (dots) ── */
+.step-dots{
+  display:flex;justify-content:center;gap:6px;
+  margin-top:16px;flex-shrink:0;
+}
+.dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.15);transition:all .3s;
+}
+.dot.active{background:#00dc82;width:20px;border-radius:3px;box-shadow:0 0 8px rgba(0,220,130,.5)}
+.dot.done{background:rgba(0,220,130,.4)}
+
+/* ── BUTTONS ── */
+.btn-area{
+  display:flex;flex-direction:column;gap:8px;
+  margin-top:16px;flex-shrink:0;
+}
+.btn{
+  width:100%;padding:14px 20px;
+  border:none;border-radius:14px;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.95rem;font-weight:700;
+  cursor:pointer;
+  transition:all .25s cubic-bezier(.34,1.56,.64,1);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  text-decoration:none;
+}
+.btn-primary{
+  background:linear-gradient(135deg,#00dc82,#00c473);
+  color:#000;
+  box-shadow:0 0 25px rgba(0,220,130,.35),0 4px 15px rgba(0,0,0,.3);
+}
+.btn-primary:hover{
+  transform:translateY(-2px) scale(1.01);
+  box-shadow:0 0 40px rgba(0,220,130,.5),0 8px 25px rgba(0,0,0,.4);
+}
+.btn-secondary{
+  background:rgba(255,255,255,.05);
+  color:rgba(200,220,255,.8);
+  border:1px solid rgba(255,255,255,.1);
+}
+.btn-secondary:hover{
+  background:rgba(255,255,255,.09);
+  border-color:rgba(255,255,255,.2);
+  color:#e8f0ff;
+  transform:translateY(-1px);
+}
+.btn-ghost{
+  background:transparent;
+  color:rgba(200,220,255,.5);
+  font-size:.82rem;
+  padding:10px;
+}
+.btn-ghost:hover{color:rgba(200,220,255,.8)}
+
+.btn-wa{
+  background:#25d366;color:#fff;
+  box-shadow:0 0 20px rgba(37,211,102,.3);
+}
+.btn-wa:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 35px rgba(37,211,102,.5);
+}
+.btn-fb{
+  background:#1877f2;color:#fff;
+  box-shadow:0 0 20px rgba(24,119,242,.3);
+}
+.btn-fb:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 35px rgba(24,119,242,.5);
+}
+
+/* ── IMPORTANT WARNING BOX ── */
+.warn-box{
+  background:rgba(255,214,10,.06);
+  border:1px solid rgba(255,214,10,.2);
+  border-radius:12px;
+  padding:14px 16px;
+  font-size:.85rem;
+  line-height:1.6;
+  color:rgba(255,235,150,.9);
+  margin-bottom:16px;
+}
+.warn-box strong{color:#ffd60a}
+
+/* ── SUCCESS CONFETTI ── */
+.confetti-wrap{
+  display:none;
+  position:fixed;inset:0;z-index:100;pointer-events:none;
+}
+.confetti-wrap.active{display:block}
+.confetti-piece{
+  position:absolute;
+  width:8px;height:8px;
+  border-radius:2px;
+  animation:confettiFall linear forwards;
+}
+@keyframes confettiFall{
+  0%{transform:translateY(-20px) rotate(0deg);opacity:1}
+  100%{transform:translateY(100vh) rotate(720deg);opacity:0}
+}
+
+/* ── BACK BTN ── */
+.back-btn{
+  position:absolute;top:20px;left:20px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  padding:7px 14px;
+  font-size:.78rem;font-weight:600;
+  color:rgba(200,220,255,.6);
+  cursor:pointer;
+  display:flex;align-items:center;gap:6px;
+  transition:all .2s;
+  display:none;
+}
+.back-btn:hover{
+  background:rgba(255,255,255,.1);
+  color:#e8f0ff;
+}
+.back-btn.visible{display:flex}
+
+/* ── RICHARD BADGE ── */
+.richard-badge{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:12px;
+  padding:10px 14px;
+  margin-bottom:16px;
+}
+.richard-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,#00dc82,#00b4f0);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;flex-shrink:0;
+  box-shadow:0 0 12px rgba(0,220,130,.3);
+}
+.richard-info{flex:1}
+.richard-name{font-weight:700;font-size:.88rem;color:#e8f0ff}
+.richard-role{font-size:.72rem;color:rgba(200,220,255,.5)}
+.online-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#00dc82;
+  box-shadow:0 0 6px rgba(0,220,130,.6);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ── MOBILE ── */
+@media(max-width:480px){
+  .card{padding:24px 20px 20px;border-radius:20px}
+  .step-title{font-size:1.35rem}
+  .obj-grid{grid-template-columns:1fr}
+  .result-box{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+<div class="aurora"></div>
+
+<!-- CONFETTI -->
+<div class="confetti-wrap" id="confetti"></div>
+
+<div class="app">
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="progress-label">Your Journey</span>
+      <span class="progress-step" id="progressText">Step 1 of 7</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:14%"></div>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="card">
+
+    <button class="back-btn" id="backBtn" onclick="goBack()">← Back</button>
+
+    <!-- ══ STEP 0: WELCOME ══ -->
+    <div class="step active" id="step-0">
+      <div class="step-scroll">
+        <span class="step-icon">🌴</span>
+        <h1 class="step-title">What if your phone<br><em>made you money?</em></h1>
+
+        <div class="richard-badge">
+          <div class="richard-avatar">👤</div>
+          <div class="richard-info">
+            <div class="richard-name">Richard Vaalotu</div>
+            <div class="richard-role">An active member, Samoa 🌴</div>
+          </div>
+          <div class="online-dot"></div>
+        </div>
+
+        <p class="step-body">
+          Hey! I'm Richard's personal guide. I'll walk you through a <strong>real income opportunity</strong> step by step — no jargon, no pressure, just facts.<br><br>
+          Takes about <strong>5 minutes</strong> and by the end you'll know exactly how to start earning <span class="highlight">weekly + monthly</span> income from your phone.
+        </p>
+      </div>
+      <div class="btn-area">
+        <button class="btn btn-primary" onclick="goTo(1)">🚀 YES — Let's Go!</button>
+        <button class="btn btn-secondary" onclick="goTo('whatisit')">🤔 What is this first?</button>
+      </div>
+    </div>
+
+    <!-- ══ WHAT IS IT ══ -->
+    <div class="step" id="step-whatisit">
+      <div class="step-scroll">
+        <span class="step-icon">✅</span>
+        <h1 class="step-title">Good question —<br><em>here's the truth</em></h1>
+        <div class="info-block">
+          A <strong>health & wellness company</strong> sells products people already buy every day — vitamins, protein shakes, greens, skincare — at up to <strong>75% cheaper</strong> than retail prices.
+        </div>
+        <div class="info-block blue">
+          They pay <strong>YOU</strong> to share it. Weekly commissions when people join. Monthly passive income from your growing network. No stock to buy. No door-to-door selling.
+        </div>
+        <p class="step-body">
+          ❌ Not a get-rich-quick scheme<br>
+          ❌ Not door-to-door selling<br>
+          ✅ Real products people actually want<br>
+          ✅ Real weekly + monthly payments<br>
+          ✅ Richard in Samoa is doing it right now
+        </p>
+      </div>
+      <div class="btn-area">
+        <button class="btn btn-primary" onclick="goTo(1)">💚 OK — Show Me How!</button>
+        <button class="btn btn-ghost" onclick="goTo(0)">← Go Back</button>
+      </div>
+    </div>
+
+    <!-- ══ STEP 1: SIMPLE EXPLANATION ══ -->
+    <div class="step" id="step-1">
+      <div class="step-scroll">
+        <span class="step-icon">💡</span>
+        <h1 class="step-title">The simple<br><em>explanation</em></h1>
+        <p class="step-body">
+          Think of it like a <strong>game with levels</strong>. You start at Level 1 earning quick weekly cash. As you level up, you unlock bigger income streams that <span class="highlight">keep paying every month</span> — even while you sleep.
+        </p>
+        <div class="info-block">
+          <strong>Level 1:</strong> Share your link. Someone joins. <strong>$25 next week.</strong><br><br>
+          <strong>Level 2:</strong> They stay as members at $9.95/month. You earn a cut <strong>every month.</strong><br><br>
+          <strong>Level 3:</strong> They build their own team. You earn <strong>50% of what they make.</strong>
+        </div>
+        <div class="info-block yellow">
+          <strong>Real example:</strong> Tell 4 friends this week → <strong class="money">$100 in your account by Friday 💵</strong>
+        </div>
+      </div>
+      <div class="btn-area">
+        <button class="btn btn-primary" onclick="goTo(2)">💰 Show Me The Money!</button>
+        <button class="btn btn-secondary" onclick="goTo('faq')">❓ I Have Questions First</button>
+      </div>
+    </div>
+
+    <!-- ══ STEP 2: INCOME ══ -->
+    <div class="step" id="step-2">
+      <div class="step-scroll">
+        <span class="step-icon">💰</span>
+        <h1 class="step-title"><em>7 ways</em> you<br>get paid</h1>
+        <p class="step-body" style="margin-bottom:16px">All 7 run at the same time. The more you grow, the more kick in.</p>
+
+        <div class="income-row">
+          <div class="income-num">1</div>
+          <div class="income-text">
+            <div class="income-title">💵 Fast Cash — Per Referral</div>
+            <div class="income-desc">$25 every time someone joins through your link.</div>
+            <span class="income-tag weekly">⚡ Paid Next Week</span>
+          </div>
+        </div>
+        <div class="income-row">
+          <div class="income-num">2</div>
+          <div class="income-text">
+            <div class="income-title">🎂 Matrix — Passive Forever</div>
+            <div class="income-desc">2.5% of every member's $9.95/month. 15 levels deep. Up to 65,534 people.</div>
+            <span class="income-tag monthly">🌙 Every Month</span>
+          </div>
+        </div>
+        <div class="income-row">
+          <div class="income-num">3</div>
+          <div class="income-text">
+            <div class="income-title">🪞 Mirror Bonus — Team Earnings</div>
+            <div class="income-desc">50% of what people you enrolled earn in their matrix. Every month.</div>
+            <span class="income-tag monthly">🌙 Every Month</span>
+          </div>
+        </div>
+        <div class="income-row">
+          <div class="income-num">4</div>
+          <div class="income-text">
+            <div class="income-title">🛒 Retail Commission — Repeat Sales</div>
+            <div class="income-desc">50% of price difference every time a retail customer reorders.</div>
+            <span class="income-tag monthly">♾️ Ongoing</span>
+          </div>
+        </div>
+        <div class="income-row">
+          <div class="income-num">5</div>
+          <div class="income-text">
+            <div class="income-title">🎁 First Order Bonus</div>
+            <div class="income-desc">10% of every new member's first product purchase.</div>
+            <span class="income-tag weekly">⚡ Paid Weekly</span>
+          </div>
+        </div>
+        <div class="income-row">
+          <div class="income-num">6</div>
+          <div class="income-text">
+            <div class="income-title">🎤 Influencer Bonus</div>
+            <div class="income-desc">Got a TikTok? Extra 10–100% on retail volume. Perfect for you!</div>
+            <span class="income-tag" style="background:rgba(176,110,243,.12);color:#b06ef3">⭐ Creator</span>
+          </div>
+        </div>
+        <div class="income-row">
+          <div class="income-num">7</div>
+          <div class="income-text">
+            <div class="income-title">👑 Diamond Pool</div>
+            <div class="income-desc">2% of ALL company revenue split among Diamond members monthly.</div>
+            <span class="income-tag" style="background:rgba(245,0,160,.1);color:#f500a0">👑 Elite</span>
+          </div>
+        </div>
+      </div>
+      <div class="btn-area">
+        <button class="btn btn-primary" onclick="goTo(3)">🧮 Calculate My Earnings!</button>
+        <button class="btn btn-secondary" onclick="goTo(4)">➡️ Skip — Next Step</button>
+      </div>
+    </div>
+
+    <!-- ══ STEP 3: CALCULATOR ══ -->
+    <div class="step" id="step-3">
+      <div class="step-scroll">
+        <span class="step-icon">🧮</span>
+        <h1 class="step-title">What could<br><em>you</em> earn?</h1>
+        <p class="step-body">How many people could you realistically share this with per month?</p>
+
+        <div class="calc-option" onclick="selectCalc(this,'low')" data-val="low">
+          <div class="radio"></div>
+          <div class="calc-option-text">1 – 3 people</div>
+          <div class="calc-option-earn">~$500+/mo</div>
+        </div>
+        <div class="calc-option" onclick="selectCalc(this,'mid')" data-val="mid">
+          <div class="radio"></div>
+          <div class="calc-option-text">4 – 10 people</div>
+          <div class="calc-option-earn">~$1,000–2,000/mo</div>
+        </div>
+        <div class="calc-option" onclick="selectCalc(this,'high')" data-val="high">
+          <div class="radio"></div>
+          <div class="calc-option-text">10 – 20 people</div>
+          <div class="calc-option-earn">~$2,000–5,000/mo</div>
+        </div>
+        <div class="calc-option" onclick="selectCalc(this,'vhigh')" data-val="vhigh">
+          <div class="radio"></div>
+          <div class="calc-option-text">20+ people 🔥</div>
+          <div class="calc-option-earn">~$5,000–16,000/mo</div>
+        </div>
+
+        <div class="result-box" id="calcResult" style="display:none">
+          <div class="result-item">
+            <span class="result-num" id="resWeekly">$75</span>
+            <div class="result-label">Weekly Fast Start</div>
+          </div>
+          <div class="result-item">
+            <span class="result-num" id="resMonthly">$500+</span>
+            <div class="result-label">Est. Monthly</div>
+          </div>
+          <div class="result-item">
+            <span class="result-num" id="resMatrix">$12</span>
+            <div class="result-label">Matrix Income</div>
+          </div>
+          <div class="result-item">
+            <span class="result-num" id="resMatching">$450+</span>
+            <div class="result-label">Matching Bonuses</div>
+          </div>
+        </div>
+        <p id="calcNote" style="font-size:.78rem;color:rgba(200,220,255,.4);margin-top:8px;display:none">*Estimates only. Real results vary.</p>
+      </div>
+      <div class="btn-area">
+        <button class="btn btn-primary" id="calcNext" onclick="goTo(4)" style="display:none">➡️ Looks Good — What's Next?</button>
+        <button class="btn btn-secondary" onclick="goTo(4)">➡️ Skip This Step</button>
+      </div>
+    </div>
+
+    <!-- ══ STEP 4: OBJECTIONS ══ -->
+    <div class="step" id="step-4">
+      <div class="step-scroll">
+        <span class="step-icon">🤔</span>
+        <h1 class="step-title">Any doubts?<br><em>Let's clear them.</em></h1>
+        <p class="step-body">Pick whatever's on your mind right now:</p>
+
+        <div class="obj-grid">
+          <div class="obj-pill" onclick="showObj('cost')">💸 Is it expensive?</div>
+          <div class="obj-pill" onclick="showObj('mlm')">🤔 Is this MLM?</div>
+          <div class="obj-pill" onclick="showObj('time')">⏰ No time for this</div>
+          <div class="obj-pill" onclick="showObj('location')">🌍 Works in the Pacific?</div>
+          <div class="obj-pill full" onclick="goTo(5)" style="text-align:center;background:rgba(0,220,130,.06);border-color:rgba(0,220,130,.15);color:#00dc82">✅ No doubts — show me how to join!</div>
+        </div>
+
+        <!-- Objection answers (hidden by default) -->
+        <div id="obj-cost" class="info-block" style="display:none">
+          <strong>💸 Total cost to start:</strong><br><br>
+          One-time fee: $40<br>
+          Monthly membership: $9.95/month<br><br>
+          <strong>Just 2 referrals = $50 back = you're already in profit.</strong><br>
+          Plus there's a 60-day money back guarantee. ✅
+        </div>
+        <div id="obj-mlm" class="info-block" style="display:none">
+          <strong>🤔 Key difference from MLM:</strong><br><br>
+          ❌ Pyramid = money from recruiting ONLY<br>
+          ✅ This = money from REAL products<br><br>
+          The Company sells $60M+ in real products yearly. You earn from product sales — not just sign-ups. <strong>Completely legal and ethical.</strong>
+        </div>
+        <div id="obj-time" class="info-block" style="display:none">
+          <strong>⏰ Real time commitment:</strong><br><br>
+          Setup: 30 minutes one time<br>
+          Daily: 15–30 mins (optional)<br><br>
+          Your matrix fills automatically as the Company grows globally — even from people you never spoke to. <strong>Most people do this alongside their regular job.</strong>
+        </div>
+        <div id="obj-location" class="info-block blue" style="display:none">
+          <strong>🌍 YES — works in the Pacific! 100%</strong><br><br>
+          Richard himself is based in Samoa and earning from this right now.<br><br>
+          ✅ Available in 100+ countries<br>
+          ✅ Payments to your account directly<br>
+          ✅ Works on any phone with internet<br>
+          <strong>Pacific Islands is actually an untapped market!</strong>
+        </div>
+      </div>
+      <div class="btn-area">
+        <button class="btn btn-primary" onclick="goTo(5)">✅ I'm Clear — Show Me How to Join!</button>
+      </div>
+    </div>
+
+    <!-- ══ STEP 5: FACEBOOK GROUP ══ -->
+    <div class="step" id="step-5">
+      <div class="step-scroll">
+        <span class="step-icon">🔵</span>
+        <h1 class="step-title">Join the free<br><em>community first</em></h1>
+        <p class="step-body">
+          Before spending anything, join our <strong>free private Facebook group.</strong> See real numbers, real results, real people — before you spend a single cent.
+        </p>
+
+        <!-- VISUAL STEP GUIDE -->
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px">
+
+          <!-- Step 1 -->
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#00dc82,#00c473);color:#000;font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">1</div>
+            <div style="flex:1">
+              <div style="font-weight:700;font-size:.9rem;margin-bottom:4px;color:#e8f0ff">Click the button below to open the group</div>
+              <div style="font-size:.8rem;color:rgba(200,220,255,.6)">Facebook will open — tap <strong style="color:#e8f0ff">"Join Group"</strong> or <strong style="color:#e8f0ff">"Request to Join"</strong></div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#00dc82,#00c473);color:#000;font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">2</div>
+            <div style="flex:1">
+              <div style="font-weight:700;font-size:.9rem;margin-bottom:8px;color:#e8f0ff">Facebook will ask you a question — fill it in exactly like this:</div>
+
+              <!-- MOCK FACEBOOK FORM -->
+              <div style="background:#18191a;border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,.1)">
+                <div style="font-size:.72rem;color:#b0b3b8;margin-bottom:8px;font-weight:600">Membership Questions</div>
+
+                <div style="background:#242526;border-radius:8px;padding:12px;margin-bottom:10px">
+                  <div style="font-size:.78rem;color:#e4e6ea;margin-bottom:8px">Who referred you to this group?</div>
+                  <!-- Mock input with name pre-filled -->
+                  <div style="position:relative">
+                    <div style="background:#3a3b3c;border:2px solid #00dc82;border-radius:6px;padding:8px 40px 8px 10px;font-size:.85rem;color:#e4e6ea;display:flex;align-items:center;gap:6px">
+                      <span style="color:#00dc82;font-weight:700">✓</span>
+                      <span id="mockName" style="font-weight:700;color:#fff">Richard Vaalotu</span>
+                    </div>
+                    <button onclick="copyName()" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:rgba(0,220,130,.2);border:1px solid rgba(0,220,130,.4);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:.7rem;font-weight:700;color:#00dc82;white-space:nowrap" id="copyBtn">Copy</button>
+                  </div>
+                  <div style="font-size:.7rem;color:rgba(200,220,255,.4);margin-top:6px">👆 Tap COPY then paste this into the Facebook question box</div>
+                </div>
+
+                <!-- Tick checkbox mock -->
+                <div style="background:#242526;border-radius:8px;padding:12px">
+                  <div style="font-size:.78rem;color:#e4e6ea;margin-bottom:8px">Have you read the group rules?</div>
+                  <div style="display:flex;align-items:center;gap:10px;cursor:pointer" onclick="toggleCheck()">
+                    <div id="fbCheckbox" style="width:20px;height:20px;border-radius:4px;background:#00dc82;border:2px solid #00dc82;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div style="font-size:.82rem;color:#e4e6ea">Yes, I agree to the group rules</div>
+                  </div>
+                  <div style="font-size:.7rem;color:rgba(200,220,255,.4);margin-top:6px">☝️ Make sure this box is <strong style="color:#00dc82">ticked ✓</strong> before submitting!</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#00dc82,#00c473);color:#000;font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">3</div>
+            <div style="flex:1">
+              <div style="font-weight:700;font-size:.9rem;margin-bottom:4px;color:#e8f0ff">Submit your request & come back here</div>
+              <div style="font-size:.8rem;color:rgba(200,220,255,.6)">Admins approves requests daily. Once approved tap <strong style="color:#e8f0ff">"I Joined!"</strong> below to continue.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COPY SUCCESS TOAST -->
+        <div id="copyToast" style="display:none;background:rgba(0,220,130,.15);border:1px solid rgba(0,220,130,.3);border-radius:10px;padding:10px 14px;font-size:.83rem;color:#00dc82;text-align:center;margin-bottom:8px">
+          ✅ <strong>Copied!</strong> Now paste it into the Facebook question box
+        </div>
+
+        <!-- JOIN NOW PAY LATER SECTION -->
+        <div style="margin-top:6px;background:linear-gradient(135deg,rgba(255,214,10,.06),rgba(255,100,50,.05));border:1px solid rgba(255,214,10,.25);border-radius:16px;padding:18px;position:relative;overflow:hidden">
+          <!-- top accent line -->
+          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#ffd60a,transparent)"></div>
+
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <span style="font-size:1.4rem">🤝</span>
+            <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:#ffd60a">Can't Pay Right Now?</div>
+          </div>
+
+          <p style="font-size:.88rem;line-height:1.75;color:rgba(230,220,180,.85);margin-bottom:14px">
+            Are you <strong style="color:#ffd60a">highly motivated</strong>, willing to work hard, and confident you can handle the <strong style="color:#ffd60a">$9.95/month</strong> going forward — but just don't have the first payment in place right now?
+          </p>
+
+          <p style="font-size:.88rem;line-height:1.75;color:rgba(230,220,180,.85);margin-bottom:16px">
+            Don't let money stop you from starting your journey. 💛<br>
+            <strong style="color:#fff">Richard personally helps motivated team members</strong> with a <strong style="color:#ffd60a">"Join Now, Pay Later"</strong> option — because he believes in people more than payments.
+          </p>
+
+          <!-- Criteria checklist -->
+          <div style="background:rgba(0,0,0,.25);border-radius:10px;padding:12px 14px;margin-bottom:14px">
+            <div style="font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,214,10,.7);margin-bottom:10px">This is for you if:</div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <div style="display:flex;gap:10px;align-items:center;font-size:.84rem;color:rgba(230,220,180,.9)">
+                <span style="color:#ffd60a;font-size:1rem;flex-shrink:0">✦</span>
+                You are <strong style="color:#fff">genuinely motivated</strong> and ready to put in the work
+              </div>
+              <div style="display:flex;gap:10px;align-items:center;font-size:.84rem;color:rgba(230,220,180,.9)">
+                <span style="color:#ffd60a;font-size:1rem;flex-shrink:0">✦</span>
+                You can comfortably handle <strong style="color:#fff">$9.95/month</strong> once you get started
+              </div>
+              <div style="display:flex;gap:10px;align-items:center;font-size:.84rem;color:rgba(230,220,180,.9)">
+                <span style="color:#ffd60a;font-size:1rem;flex-shrink:0">✦</span>
+                You just need a <strong style="color:#fff">little help</strong> getting over the first payment
+              </div>
+              <div style="display:flex;gap:10px;align-items:center;font-size:.84rem;color:rgba(230,220,180,.9)">
+                <span style="color:#ffd60a;font-size:1rem;flex-shrink:0">✦</span>
+                You're committed to <strong style="color:#fff">building this seriously</strong> — not just trying it out
+              </div>
+            </div>
+          </div>
+
+          <p style="font-size:.8rem;color:rgba(200,190,140,.7);margin-bottom:14px;line-height:1.6;font-style:italic">
+            "I started this to help people build a better life — not to let a small payment get in the way of someone's future." — Richard 🌴
+          </p>
+
+          <!-- Contact buttons -->
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <a href="https://wa.me/6857802282?text=Hi%20Richard!%20I%20saw%20the%20%22Join%20Now%2C%20Pay%20Later%22%20option.%20I%20am%20highly%20motivated%20and%20ready%20to%20work%20but%20need%20help%20with%20the%20first%20payment.%20Can%20we%20talk%3F%20%F0%9F%99%8F"
+              target="_blank"
+              style="display:flex;align-items:center;justify-content:center;gap:10px;background:#25d366;color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.9rem;padding:13px 20px;border-radius:12px;text-decoration:none;box-shadow:0 0 20px rgba(37,211,102,.3);transition:all .25s">
+              💬 WhatsApp Richard — Let's Talk
+            </a>
+            <a href="https://www.facebook.com/richard.vaalotu.2025"
+              target="_blank"
+              style="display:flex;align-items:center;justify-content:center;gap:10px;background:rgba(24,119,242,.2);border:1px solid rgba(24,119,242,.4);color:#5b9cf6;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.88rem;padding:11px 20px;border-radius:12px;text-decoration:none;transition:all .25s">
+              👤 Message on Facebook Instead
+            </a>
+          </div>
+
+          <div style="text-align:center;margin-top:10px;font-size:.72rem;color:rgba(200,190,140,.5)">
+            This offer is for serious, motivated people only. Richard reviews each request personally.
+          </div>
+        </div>
+
+      </div>
+      <div class="btn-area">
+        <a class="btn btn-fb" href="https://reachforthestarsandearn.com" target="_blank">🔵Request to join Facebook Group Now</a>
+        <button class="btn btn-primary" onclick="goTo(6)">✅ I Joined the Group!</button>
+        <button class="btn btn-ghost" onclick="comebackLater()">⏰ I'll Look Around First</button>
+      </div>
+    </div>
+
+    <!-- ══ STEP 6: SIGN UP ══ -->
+    <div class="step" id="step-6">
+      <div class="step-scroll">
+        <span class="step-icon">🚀</span>
+        <h1 class="step-title">Final step —<br><em>let's sign you up!</em></h1>
+        <p class="step-body">
+          You're literally one step away from your first weekly income. The signup takes <strong>less than 5 minutes.</strong>
+        </p>
+        <div class="warn-box">
+          ⚠️ <strong>IMPORTANT:</strong> On the signup page, in the <strong>referrer / sponsor section</strong> type exactly:<br><br>
+          <strong style="font-size:1.1rem;color:#ffd60a">Richard Vaalotu</strong><br><br>
+          This puts you directly on Richard's team so he can personally guide you through your first steps!
+        </div>
+        <div class="info-block">
+          <strong>What you're signing up for:</strong><br>
+          ✅ Member + Affiliate ($49.95 one-time)<br>
+          ✅ Monthly membership ($9.95/month)<br>
+          ✅ 60-day money back guarantee<br>
+          ✅ Immediate access to all 7 income streams
+        </div>
+      </div>
+      <div class="btn-area">
+        <a class="btn btn-primary" href="https://www.livegood.com/cjoin" target="_blank" onclick="setTimeout(()=>showDoneBtn(),3000)">🚀 Sign Up Now — Join Richard's Team</a>
+        <button class="btn btn-secondary" id="doneBtn" style="display:none" onclick="goTo(7)">✅ I Signed Up! I'm In!</button>
+        <button class="btn btn-ghost" onclick="needsHelp()">🆘 I Need Help Signing Up</button>
+      </div>
+    </div>
+
+    <!-- ══ STEP 7: SUCCESS ══ -->
+    <div class="step" id="step-7">
+      <div class="step-scroll">
+        <span class="step-icon">🎊</span>
+        <h1 class="step-title">WELCOME TO<br><em>THE TEAM!</em></h1>
+        <p class="step-body">
+          You just made one of the best decisions of your life. <strong>Richard has been notified</strong> and will personally reach out to welcome you and walk you through your first steps. 🌴
+        </p>
+        <div class="info-block" style="text-align:center">
+          <strong>While you wait:</strong><br><br>
+          📌 Check the pinned post in the Facebook group<br>
+          🛒 Browse the products you'll be promoting<br>
+          💭 Think about who you'll share this with first
+        </div>
+        <div class="info-block blue">
+          <strong>Your first goal:</strong> Sign up 2 people this week.<br>
+          That's <strong>$50 Fast Start</strong> in your account next Friday.<br>
+          One referral covers your entire startup cost.
+        </div>
+        <div class="richard-badge" style="margin-top:8px">
+          <div class="richard-avatar">👤</div>
+          <div class="richard-info">
+            <div class="richard-name">Richard Vaalotu</div>
+            <div class="richard-role">Will contact you personally very soon 🙏</div>
+          </div>
+          <div class="online-dot"></div>
+        </div>
+      </div>
+      <div class="btn-area">
+        <a class="btn btn-wa" href="https://wa.me/6857892282?text=Hi%20Richard!%20I%20just%20signed%20up%20through%20your%20bot!%20I'm%20ready%20to%20get%20started%20%F0%9F%9A%80" target="_blank">💬 Message Richard on WhatsApp Now</a>
+        <a class="btn btn-secondary" href="https://shoplivegood.com/products" target="_blank">🛒 Browse the Products</a>
+      </div>
+    </div>
+
+    <!-- ══ FAQ ══ -->
+    <div class="step" id="step-faq">
+      <div class="step-scroll">
+        <span class="step-icon">❓</span>
+        <h1 class="step-title">Got<br><em>questions?</em></h1>
+        <div class="obj-grid">
+          <div class="obj-pill" onclick="showFaq('cost')">💸 How much to start?</div>
+          <div class="obj-pill" onclick="showFaq('earn')">💰 How much can I earn?</div>
+          <div class="obj-pill" onclick="showFaq('samoa')">🌴 Works in Samoa?</div>
+          <div class="obj-pill" onclick="showFaq('mlm')">🤔 Is it MLM?</div>
+          <div class="obj-pill" onclick="showFaq('time')">⏰ Time needed?</div>
+          <div class="obj-pill" onclick="showFaq('products')">🛒 What products?</div>
+        </div>
+        <div id="faq-answer" class="info-block" style="display:none;margin-top:8px"></div>
+      </div>
+      <div class="btn-area">
+        <button class="btn btn-primary" onclick="goTo(1)">✅ I'm convinced — Let's Go!</button>
+        <button class="btn btn-ghost" onclick="goTo(0)">← Back to Start</button>
+      </div>
+    </div>
+
+    <!-- ══ COMEBACK LATER ══ -->
+    <div class="step" id="step-comeback">
+      <div class="step-scroll" style="text-align:center">
+        <span class="step-icon">🙏</span>
+        <h1 class="step-title">No rush<br><em>at all!</em></h1>
+        <p class="step-body" style="text-align:center">
+          Take all the time you need. Come back whenever you're ready and tap the button below to continue where you left off.<br><br>
+          Richard is always available if you have questions!
+        </p>
+        <div class="info-block" style="text-align:center">
+          📱 <strong>WhatsApp:</strong> +685 7802282<br>
+          💬 <strong>Facebook:</strong> richard.vaalotu.2025<br>
+          🎵 <strong>TikTok:</strong> @richardvaalotu
+        </div>
+      </div>
+      <div class="btn-area">
+        <button class="btn btn-primary" onclick="goTo(5)">🚀 I'm Ready Now!</button>
+        <a class="btn btn-wa" href="https://wa.me/6857802282" target="_blank">💬 Chat with Richard</a>
+      </div>
+    </div>
+
+    <!-- ══ NEEDS HELP ══ -->
+    <div class="step" id="step-help">
+      <div class="step-scroll" style="text-align:center">
+        <span class="step-icon">🆘</span>
+        <h1 class="step-title">No worries —<br><em>Richard's got you!</em></h1>
+        <p class="step-body" style="text-align:center">
+          Richard will personally walk you through the signup process. Just reach out directly:
+        </p>
+        <div class="info-block" style="text-align:center">
+          📱 <strong>WhatsApp:</strong> +685 7802282<br>
+          💬 <strong>Facebook:</strong> richard.vaalotu.2025<br>
+          🎵 <strong>TikTok:</strong> @richardvaalotu<br>
+          ✉️ <strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5f2d363c373e2d3b1f373e32302b3a3c372c30332a2b3630312c713c3032">[email&#160;protected]</a>
+        </div>
+        <p class="step-body" style="text-align:center;margin-top:8px;font-size:.85rem">
+          Tell him you got stuck at the signup page and he'll sort it out for you step by step. 💚
+        </p>
+      </div>
+      <div class="btn-area">
+        <a class="btn btn-wa" href="https://wa.me/6857802282?text=Hi%20Richard!%20I%20need%20help%20signing%20up%20for%20the Company%20through%20your%20link" target="_blank">💬 WhatsApp Richard Now</a>
+        <button class="btn btn-secondary" onclick="goTo(6)">← Try Signing Up Again</button>
+      </div>
+    </div>
+
+    <!-- DOTS -->
+    <div class="step-dots" id="dots"></div>
+
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── STARS ──────────────────────────────────
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let stars = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+for (let i = 0; i < 120; i++) {
+  stars.push({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    r: Math.random() * 1.2 + 0.2,
+    a: Math.random(),
+    v: Math.random() * 0.004 + 0.001,
+    color: Math.random() > 0.7 ? '#00dc82' : Math.random() > 0.5 ? '#00b4f0' : '#ffffff'
+  });
+}
+
+function animStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(s => {
+    s.a += s.v;
+    const alpha = (Math.sin(s.a) + 1) / 2 * 0.7 + 0.1;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = s.color;
+    ctx.globalAlpha = alpha;
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(animStars);
+}
+animStars();
+
+// ── NAVIGATION ─────────────────────────────
+const TOTAL_STEPS = 7;
+let currentStep = 0;
+let history = [];
+
+const stepConfig = {
+  0: { progress: 1, label: 'Welcome' },
+  'whatisit': { progress: 1, label: 'About' },
+  1: { progress: 2, label: 'The Idea' },
+  2: { progress: 3, label: 'Income' },
+  3: { progress: 4, label: 'Calculator' },
+  4: { progress: 5, label: 'Questions' },
+  5: { progress: 6, label: 'Community' },
+  6: { progress: 7, label: 'Sign Up' },
+  7: { progress: 7, label: 'Done! 🎉' },
+  'faq': { progress: 1, label: 'FAQ' },
+  'comeback': { progress: 6, label: 'See You Soon' },
+  'help': { progress: 7, label: 'Get Help' }
+};
+
+function buildDots() {
+  const dots = document.getElementById('dots');
+  dots.innerHTML = '';
+  for (let i = 0; i <= TOTAL_STEPS; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot';
+    d.id = `dot-${i}`;
+    dots.appendChild(d);
+  }
+}
+buildDots();
+
+function updateProgress(stepId) {
+  const cfg = stepConfig[stepId] || { progress: 1, label: '' };
+  const pct = Math.round((cfg.progress / TOTAL_STEPS) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent =
+    typeof stepId === 'number' && stepId <= TOTAL_STEPS
+      ? `Step ${cfg.progress} of ${TOTAL_STEPS}`
+      : cfg.label;
+
+  // Update dots
+  document.querySelectorAll('.dot').forEach((d, i) => {
+    d.className = 'dot';
+    const stepNum = typeof stepId === 'number' ? stepId : 0;
+    if (i < stepNum) d.classList.add('done');
+    else if (i === stepNum) d.classList.add('active');
+  });
+}
+
+function showStep(id) {
+  // Hide all
+  document.querySelectorAll('.step').forEach(s => {
+    s.classList.remove('active', 'exit');
+    s.style.display = 'none';
+  });
+
+  // Show target
+  const target = document.getElementById(`step-${id}`);
+  if (target) {
+    target.style.display = 'flex';
+    target.classList.add('active');
+    // Scroll to top of step
+    const scroll = target.querySelector('.step-scroll');
+    if (scroll) scroll.scrollTop = 0;
+  }
+
+  // Back button
+  const backBtn = document.getElementById('backBtn');
+  backBtn.className = 'back-btn' + (history.length > 0 ? ' visible' : '');
+
+  currentStep = id;
+  updateProgress(id);
+}
+
+function goTo(id) {
+  history.push(currentStep);
+  showStep(id);
+}
+
+function goBack() {
+  if (history.length > 0) {
+    const prev = history.pop();
+    showStep(prev);
+  }
+}
+
+// ── CALCULATOR ────────────────────────────
+const calcData = {
+  low:   { weekly: '$75',   monthly: '$500+',    matrix: '$12',   matching: '$450+' },
+  mid:   { weekly: '$250',  monthly: '$1,500+',  matrix: '$50',   matching: '$1,200+' },
+  high:  { weekly: '$500',  monthly: '$3,000+',  matrix: '$125',  matching: '$2,500+' },
+  vhigh: { weekly: '$1,000+', monthly: '$8,000+', matrix: '$300+', matching: '$6,000+' }
+};
+
+function selectCalc(el, val) {
+  document.querySelectorAll('.calc-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+
+  const d = calcData[val];
+  document.getElementById('resWeekly').textContent = d.weekly;
+  document.getElementById('resMonthly').textContent = d.monthly;
+  document.getElementById('resMatrix').textContent = d.matrix;
+  document.getElementById('resMatching').textContent = d.matching;
+
+  const box = document.getElementById('calcResult');
+  const note = document.getElementById('calcNote');
+  const nextBtn = document.getElementById('calcNext');
+  box.style.display = 'grid';
+  note.style.display = 'block';
+  nextBtn.style.display = 'flex';
+
+  // Animate numbers
+  box.style.animation = 'none';
+  box.offsetHeight; // reflow
+  box.style.animation = 'stepIn .3s ease';
+}
+
+// ── OBJECTIONS ────────────────────────────
+let activeObj = null;
+function showObj(type) {
+  if (activeObj) document.getElementById(`obj-${activeObj}`).style.display = 'none';
+  document.getElementById(`obj-${type}`).style.display = 'block';
+  activeObj = type;
+}
+
+// ── FAQ ───────────────────────────────────
+const faqData = {
+  cost:     '💸 <strong>Total cost to start:</strong><br>One-time: $40 · Monthly: $9.95<br>Just 2 referrals = $50 = you\'re in profit. 60-day money back guarantee ✅',
+  earn:     '💰 <strong>Income potential:</strong><br>$25/referral weekly + matrix monthly + 50% matching bonuses. Most people earn $500–$2,000/mo within 90 days.',
+  samoa:    '🌴 <strong>Yes — works in Samoa!</strong><br>Richard is based in Samoa and earning right now. Available in 100+ countries. Payments direct to your account.',
+  mlm:      '🤔 <strong>Not a pyramid:</strong><br>Money comes from REAL product sales — not just recruiting. The Company sells $60M+ in products yearly.',
+  time:     '⏰ <strong>Time needed:</strong><br>30 min setup. 15–30 min/day optional. Matrix fills automatically as the Company grows globally.',
+  products: '🛒 <strong>Products include:</strong><br>Vitamins, protein shakes, greens, CBD, skincare, pet care and more. All 75% cheaper than retail prices.'
+};
+function showFaq(key) {
+  const el = document.getElementById('faq-answer');
+  el.innerHTML = faqData[key];
+  el.style.display = 'block';
+  el.style.animation = 'none';
+  el.offsetHeight;
+  el.style.animation = 'stepIn .3s ease';
+}
+
+// ── SPECIAL ACTIONS ───────────────────────
+function comebackLater() { goTo('comeback'); }
+function needsHelp() { goTo('help'); }
+
+function showDoneBtn() {
+  document.getElementById('doneBtn').style.display = 'flex';
+}
+
+// ── CONFETTI ──────────────────────────────
+function fireConfetti() {
+  const wrap = document.getElementById('confetti');
+  wrap.classList.add('active');
+  wrap.innerHTML = '';
+  const colors = ['#00dc82','#00b4f0','#ffd60a','#f500a0','#ffffff'];
+  for (let i = 0; i < 60; i++) {
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.cssText = `
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      width:${Math.random()*8+4}px;
+      height:${Math.random()*8+4}px;
+      border-radius:${Math.random()>0.5?'50%':'2px'};
+      animation-duration:${Math.random()*2+1.5}s;
+      animation-delay:${Math.random()*0.5}s;
+    `;
+    wrap.appendChild(p);
+  }
+  setTimeout(() => { wrap.classList.remove('active'); wrap.innerHTML = ''; }, 4000);
+}
+
+// Fire confetti when reaching success step
+const origGoTo = goTo;
+window.goTo = function(id) {
+  if (id === 7) fireConfetti();
+  origGoTo(id);
+};
+
+// ── COPY NAME ────────────────────────────
+function copyName() {
+  const text = 'Richard Vaalotu';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+  } else { fallbackCopy(text); }
+  const btn = document.getElementById('copyBtn');
+  const toast = document.getElementById('copyToast');
+  btn.textContent = '✓ Done!';
+  btn.style.background = 'rgba(0,220,130,.4)';
+  if(toast) toast.style.display = 'block';
+  setTimeout(() => { btn.textContent = 'Copy'; btn.style.background = 'rgba(0,220,130,.2)'; }, 3000);
+}
+function fallbackCopy(text) {
+  const el = document.createElement('textarea');
+  el.value = text; document.body.appendChild(el);
+  el.select(); document.execCommand('copy');
+  document.body.removeChild(el);
+}
+
+// ── CHECKBOX DEMO ────────────────────────
+let checkState = true;
+function toggleCheck() {
+  checkState = !checkState;
+  const box = document.getElementById('fbCheckbox');
+  if(!box) return;
+  if (checkState) {
+    box.style.background = '#00dc82'; box.style.borderColor = '#00dc82';
+    box.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  } else {
+    box.style.background = 'transparent'; box.style.borderColor = 'rgba(255,255,255,.3)';
+    box.innerHTML = '';
+  }
+}
+
+// ── INIT ─────────────────────────────────
+showStep(0);
+</script>
+</body>
+</html>
